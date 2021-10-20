@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{A0709537-D74A-4192-A994-958FBB278CF0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{B567DDE9-24D1-49F9-8210-12DE1A630215}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A0709537-D74A-4192-A994-958FBB278CF0} = {A0709537-D74A-4192-A994-958FBB278CF0}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

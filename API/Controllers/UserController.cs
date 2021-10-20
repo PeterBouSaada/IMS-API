@@ -37,7 +37,8 @@ namespace API.Controllers
             return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(users) { StatusCode = StatusCodes.Status400BadRequest }; ;
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        [HttpPost("add")]
         public IActionResult Add([FromBody] User user)
         {
             User addedUser = _userService.AddUser(user);
@@ -51,7 +52,7 @@ namespace API.Controllers
             return deletedUser != null ? new ObjectResult(deletedUser) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(deletedUser) { StatusCode = StatusCodes.Status400BadRequest };
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         public IActionResult Update([FromBody] User user)
         {
             User updatedUser = _userService.UpdateUser(user);
