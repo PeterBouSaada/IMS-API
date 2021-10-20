@@ -1,9 +1,10 @@
 ﻿{
   "ConnectionStrings": {
-    "Database": "mongodb+srv://admin:pipo03569969@ims.wnbr5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    "Database": "mongodbStringConnection"
   },
   "JWTTokenData": {
-    "Private_Key": "ABC123",
-    "Expires_In": 24
+    "Private_Key": "private key",
+    "Expires_In": 1 // hours as an integer
   }
 }
+
