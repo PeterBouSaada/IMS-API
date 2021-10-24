@@ -1,4 +1,4 @@
-<div *ngIf="loggedIn; then routerScreen; else loginScreen"></div>
+<!-- <div *ngIf="loggedIn; then routerScreen; else loginScreen"></div>
 
 <ng-template #routerScreen>
   <router-outlet #routerScreen></router-outlet>
@@ -6,4 +6,6 @@
 
 <ng-template #loginScreen>
   <app-login></app-login>
-</ng-template>
+</ng-template> -->
+
+<router-outlet></router-outlet>

@@ -8,9 +8,8 @@ import { LoginComponent } from './components/login/login.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  loggedIn: boolean = false;
 
-  constructor(private _router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {
   }
