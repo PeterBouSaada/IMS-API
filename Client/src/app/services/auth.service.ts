@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot,RouterStateSnapshot } from '@angular/router';
-import { stringify } from 'querystring';
-import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class AuthService implements CanActivate {
+export class AuthService {
 
   constructor() { }
 
-  canActivate(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean>
+  isTokenValid()
   {
-    let token = localStorage.getItem("token")?.toString() || "";
-    if(!this.tokenExpired(token))
+    let token = localStorage.getItem("token")?.toString();
+    if(token == null)
     {
-      return of(true);
+      return false;
     }
-    return of(false);
+    return true;
   }
 
   private tokenExpired(token: string) {
