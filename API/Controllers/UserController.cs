@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -75,7 +76,8 @@ namespace API.Controllers
             {
                 return Unauthorized();
             }
-            return Ok(token);
+            string json = JsonConvert.SerializeObject(new { token = token });
+            return Ok(json);
         }
 
     }

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { LoginComponent } from './components/login/login.component';
-import { AuthService } from './services/auth.service';
 import { UserLoggedInGuard } from './services/guards/user-logged-in-guard.service';
 import { UserNotLoggedInGuard } from './services/guards/user-not-logged-in-guard.service';
 

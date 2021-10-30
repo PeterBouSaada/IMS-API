@@ -23,7 +23,7 @@
     },
     "API": {
       "commandName": "Project",
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "API/item",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

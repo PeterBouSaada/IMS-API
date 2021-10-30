@@ -37,7 +37,12 @@ namespace API
             string key = Configuration.GetSection("JWTTokenData").GetSection("Private_Key").Value;
             services.AddControllers().AddNewtonsoftJson();
 
-            services.AddCors(b => b.AddPolicy("policy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            services.AddCors(
+                b => b.AddPolicy("policy", builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+            ));
 
             _ = services.AddAuthentication(x =>
               {
@@ -72,12 +77,12 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
             app.UseCors("policy");
+
+            app.UseHttpsRedirection();
 
             app.UseAuthentication();
 
