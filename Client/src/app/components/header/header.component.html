@@ -1,1 +1,17 @@
-<p>header works!</p>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand mr-sm-5" routerLink="/Inventory">
+      <span class="big">IMS</span><div class="dot"></div><span class="small">solutions</span>
+    </a>
+    <ul class="navbar-nav mr-auto navbar-expand-lg">
+      <li class="nav-item mr-sm-4" [ngClass]="{'active' : route === '/Inventory'}">
+        <a class="nav-link" routerLink="/Inventory">Inventory</a>
+      </li>
+      <li class="nav-item mr-sm-4" [ngClass]="{'active' : route === '/Users'}">
+        <a class="nav-link" routerLink="/Users">Users</a>
+      </li>
+    </ul>
+    <form class="form-inline w-50 justify-content-end">
+        <input class="form-control w-75 input-large search-query mr-sm-2 float-right" type="search" placeholder="Find in inventory" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0 float-right" type="submit">Search</button>
+      </form>
+  </nav>

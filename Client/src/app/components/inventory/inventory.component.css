@@ -1,0 +1,8 @@
+
+app-inventory, .table-container {
+    box-sizing:border-box;
+    height: calc(100vh - 56px);
+    width: 100%;
+    display: block;
+    overflow-y: auto;
+}

@@ -7,13 +7,15 @@ import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HeaderComponent,
-    InventoryComponent
+    InventoryComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

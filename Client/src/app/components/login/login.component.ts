@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       if(response.status == 200)
       {
         localStorage.setItem("token", response.body.token);
-        this._router.navigate(['/']);
+        this._router.navigate(['/Inventory']);
       }
     });
   }
