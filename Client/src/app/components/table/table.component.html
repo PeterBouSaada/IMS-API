@@ -8,15 +8,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of forLimit(23); let i = index">
+            <tr *ngFor="let field of forLimit(23); let i = index">
                 <td *ngIf="i >= data.length then format; else print"></td>
                 <ng-template #format>
-                    <td scope="row" *ngFor="let prop of headers">-</td>
                     <td scope="row">-</td>
+                    <td scope="row" *ngFor="let prop of headers"></td>
                 </ng-template>
                 <ng-template #print>
-                    <td scope="row" *ngFor="let p of item | keyvalue">{{ p.value }}</td>
-                    <td scope="row"><button *ngIf="item.partNumber != null" class="btn mr-md-4 btn-sm btn-outline-success">View</button><button *ngIf="item.partNumber != null" class="btn btn-sm btn-outline-primary">Edit</button></td>
+                    <td scope="row" *ngFor="let p of field | keyvalue: originalOrder">{{ p.value }}</td>
+                    <td scope="row text-xs-right"><button *ngIf="field.id != null" class="btn mr-md-4 btn-sm btn-outline-success">View</button><button *ngIf="field.id != null" class="btn btn-sm btn-outline-primary">Edit</button></td>
                 </ng-template>
             </tr>
         </tbody>

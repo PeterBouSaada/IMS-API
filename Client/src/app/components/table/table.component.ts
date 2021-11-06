@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { Item } from 'src/app/Models/Item';
@@ -11,8 +12,8 @@ import { Item } from 'src/app/Models/Item';
 export class TableComponent implements OnInit {
 
   @Input() caption: string;
-  @Input() headers: Array<string>;
-  @Input() data: Array<Item>;
+  @Input() headers: string[];
+  @Input() data: any[];
 
   constructor() {}
 
@@ -22,17 +23,17 @@ export class TableComponent implements OnInit {
   forLimit(num: number) {
     if(num > this.data.length)
     {
-      let items: Array<Item> = [];
+      let items: any[] = [];
       let i: number;
       for(i = 0; i < num; i++)
       {
         if (i < this.data.length)
         {
-         items[i] = this.data[i];        
+         items[i] = this.data[i];
         }
         else 
         {
-          items[i] = new Item;
+          items[i] = new Object;
         }
       }
       console.log(items);
@@ -40,6 +41,18 @@ export class TableComponent implements OnInit {
     }
     console.log(this.data);
     return this.data;
+  }
+
+  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return 0;
+  }
+
+  valueAscOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return a.value.localeCompare(b.value);
+  }
+
+  keyDescOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return a.key > b.key ? -1 : (b.key > a.key ? 1 : 0);
   }
 
 }

@@ -5,3 +5,17 @@ app-login {
     margin: 0;
     padding: 0;
 }
+
+.logo {
+    margin-bottom: 10px;
+}
+
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50px;
+    margin: 0 5px 0 5px;
+    border: 0;
+}
