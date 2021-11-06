@@ -8,6 +8,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './components/users/users.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { UsersComponent } from './components/users/users.component';
     LoginComponent,
     HeaderComponent,
     InventoryComponent,
-    UsersComponent
+    UsersComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

@@ -7,47 +7,48 @@ import { Item } from 'src/app/Models/Item';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+  caption : string = "Inventory List";
+  testData: Array<Item> = [
+    {
+      id : "test1",
+      type : "test1",
+      partNumber : "test1",
+      qtyOnHand : 5,
+      location : "test1",
+      height : 5,
+      width : 5,
+      length : 5,
+      UOM : "test1",
+      manufacturer : "test1",
+      manufacturerPhoneNumber : "test1",
+      userFor : "test1",
+      horsepower : 10,
+      amperage : 10,
+      volatge : 10,
+      RPM : 100
+    },
+    {
+      id : "test1",
+      type : "test1",
+      partNumber : "test1",
+      qtyOnHand : 5,
+      location : "test1",
+      height : 5,
+      width : 5,
+      length : 5,
+      UOM : "test1",
+      manufacturer : "test1",
+      manufacturerPhoneNumber : "test1",
+      userFor : "test1",
+      horsepower : 10,
+      amperage : 10,
+      volatge : 10,
+      RPM : 100
+    }
+  ]
+  headers: Array<string> = ["ID", "Part#", "Type", "Qty", "Location", "Height", "Width", "Length", "UOM", "Manufacturer", "Man. Phone #", "Used for", "Horsepower", "Amperage", "Voltage", "RPM"];
 
-  testData: Array<Item>;
-  constructor() {
-    this.testData = new Array<Item>();
-    this.testData.push({
-      id : "test1",
-      type : "test1",
-      partNumber : "test1",
-      qtyOnHand : 5,
-      location : "test1",
-      height : 5,
-      width : 5,
-      length : 5,
-      UOM : "test1",
-      manufacturer : "test1",
-      manufacturerPhoneNumber : "test1",
-      userFor : "test1",
-      horsepower : 10,
-      amperage : 10,
-      volatge : 10,
-      RPM : 100
-    });
-    this.testData.push({
-      id : "test1",
-      type : "test1",
-      partNumber : "test1",
-      qtyOnHand : 5,
-      location : "test1",
-      height : 5,
-      width : 5,
-      length : 5,
-      UOM : "test1",
-      manufacturer : "test1",
-      manufacturerPhoneNumber : "test1",
-      userFor : "test1",
-      horsepower : 10,
-      amperage : 10,
-      volatge : 10,
-      RPM : 100
-    });
-  }
+  constructor() {}
 
   ngOnInit(): void {
   }
