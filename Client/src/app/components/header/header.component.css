@@ -7,3 +7,7 @@
     margin: 0 5px 0 5px;
     border: 0;
 }
+
+.no-select {
+    user-select: none;
+}

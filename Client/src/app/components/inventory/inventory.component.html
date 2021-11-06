@@ -1,1 +1,1 @@
-<app-table [caption]="caption" [headers]="headers" [data]="testData"></app-table>
+<app-table [caption]="caption" [headers]="headers" [data]="data" (viewEvent)="viewEvent($event)" (editEvent)="editEvent($event)"></app-table>

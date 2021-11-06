@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
       salt: "test"
     }
   ]
-  headers: Array<string> = ["ID", "username", "password", "salt"];
+  headers: Array<string> = ["ID", "Username", "Password", "Salt"];
 
   constructor() { }
 

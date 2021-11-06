@@ -1,6 +1,5 @@
 import { KeyValue } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Item } from 'src/app/Models/Item';
 
 @Component({
@@ -14,6 +13,8 @@ export class TableComponent implements OnInit {
   @Input() caption: string;
   @Input() headers: string[];
   @Input() data: any[];
+  @Output() viewEvent: EventEmitter<any> = new EventEmitter();
+  @Output() editEvent: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
@@ -36,11 +37,25 @@ export class TableComponent implements OnInit {
           items[i] = new Object;
         }
       }
-      console.log(items);
       return items;
     }
     console.log(this.data);
     return this.data;
+  }
+
+  view(id : string)
+  {
+    this.viewEvent.emit(id);
+  }
+
+  edit(id : string)
+  {
+    this.editEvent.emit(id);
+  }
+
+  stopCopy()
+  {
+    return false;
   }
 
   originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {

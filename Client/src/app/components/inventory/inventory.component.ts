@@ -8,7 +8,7 @@ import { Item } from 'src/app/Models/Item';
 })
 export class InventoryComponent implements OnInit {
   caption : string = "Inventory List";
-  testData: Array<Item> = [
+  data: Array<Item> = [
     {
       id : "test1",
       type : "test1",
@@ -28,7 +28,61 @@ export class InventoryComponent implements OnInit {
       RPM : 100
     },
     {
-      id : "test1",
+      id : "test2",
+      type : "test1",
+      partNumber : "test1",
+      qtyOnHand : 5,
+      location : "test1",
+      height : 5,
+      width : 5,
+      length : 5,
+      UOM : "test1",
+      manufacturer : "test1",
+      manufacturerPhoneNumber : "test1",
+      userFor : "test1",
+      horsepower : 10,
+      amperage : 10,
+      volatge : 10,
+      RPM : 100
+    },
+    {
+      id : "test3",
+      type : "test1",
+      partNumber : "test1",
+      qtyOnHand : 5,
+      location : "test1",
+      height : 5,
+      width : 5,
+      length : 5,
+      UOM : "test1",
+      manufacturer : "test1",
+      manufacturerPhoneNumber : "test1",
+      userFor : "test1",
+      horsepower : 10,
+      amperage : 10,
+      volatge : 10,
+      RPM : 100
+    },
+    {
+      id : "test4",
+      type : "test1",
+      partNumber : "test1",
+      qtyOnHand : 5,
+      location : "test1",
+      height : 5,
+      width : 5,
+      length : 5,
+      UOM : "test1",
+      manufacturer : "test1",
+      manufacturerPhoneNumber : "test1",
+      userFor : "test1",
+      horsepower : 10,
+      amperage : 10,
+      volatge : 10,
+      RPM : 100
+    },
+    {
+      id : "test5",
       type : "test1",
       partNumber : "test1",
       qtyOnHand : 5,
@@ -54,15 +108,15 @@ export class InventoryComponent implements OnInit {
   }
 
   forLimit(num: number) {
-    if(num > this.testData.length)
+    if(num > this.data.length)
     {
       let items: Array<Item> = [];
       let i: number;
       for(i = 0; i < num; i++)
       {
-        if (i < this.testData.length)
+        if (i < this.data.length)
         {
-         items[i] = this.testData[i];        
+         items[i] = this.data[i];        
         }
         else 
         {
@@ -72,8 +126,18 @@ export class InventoryComponent implements OnInit {
       console.log(items);
       return items;
     }
-    console.log(this.testData);
-    return this.testData;
+    console.log(this.data);
+    return this.data;
+  }
+
+  viewEvent(id: Event)
+  {
+    console.log("View Event on ID: " + id);
+  }
+
+  editEvent(id: Event)
+  {
+    console.log("Edit Event on ID: " + id);
   }
 
 }
