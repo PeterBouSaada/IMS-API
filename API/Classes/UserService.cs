@@ -87,7 +87,7 @@ namespace API.Classes
 
             finalFilter = FilterBuilder.And(filters);
 
-            return collection.Find(finalFilter).ToList();
+            return collection.Find(finalFilter)?.ToList();
         }
 
         public User UpdateUser(User user)

@@ -9,20 +9,7 @@ import { User } from 'src/app/Models/user';
 export class UsersComponent implements OnInit {
 
   caption : string = "User List";
-  testData: Array<User> = [
-    {
-      id : "asdasfasd",
-      username: "pbousaada",
-      password: "fake pass",
-      salt: "test"
-    },
-    {
-      id : "asda;khasd as",
-      username: "jbousaada",
-      password: "fake pass",
-      salt: "test"
-    }
-  ]
+  testData: Array<User> = []
   headers: Array<string> = ["ID", "Username", "Password", "Salt"];
 
   constructor() { }

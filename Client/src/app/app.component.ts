@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
+import { RequestService } from './services/request/request.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
 
   isLoggedIn: boolean;
 
-  constructor(private _authService: AuthService, private _router: Router) {
+  constructor(private _requestService: RequestService , private _router: Router) {
     this._router.navigate(['/Inventory']);
   }
 
@@ -19,7 +20,7 @@ export class AppComponent {
 
   checkLogin()
   {
-    this.isLoggedIn = this._authService.isTokenValid();
+    this.isLoggedIn = this._requestService.isTokenValid();
   }
 
 }

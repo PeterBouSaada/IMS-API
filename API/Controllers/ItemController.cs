@@ -59,7 +59,7 @@ namespace API.Controllers
             return updatedItem != null ? new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status400BadRequest };
         }
 
-        [HttpGet("getAll")]
+        [HttpGet]
         public IActionResult getAll()
         {
             List<Item> items = _itemService.getAllItems();

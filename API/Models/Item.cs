@@ -13,11 +13,12 @@ namespace API.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string id { get; set; }
-        [BsonElement("type")]
-        public string type { get; set; }
+
         [JsonProperty(PropertyName = "part_number")]
         [BsonElement("part_number")]
         public string partNumber { get; set; }
+        [BsonElement("type")]
+        public string type { get; set; }
         [JsonProperty(PropertyName = "qty_on_hand")]
         [BsonElement("qty_on_hand")]
         public int? qtyOnHand { get; set; }

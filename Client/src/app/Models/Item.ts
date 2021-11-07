@@ -1,8 +1,8 @@
 export class Item {
     id: string;
+    part_number: string;
     type: string;
-    partNumber: string;
-    qtyOnHand: number;
+    qty_on_hand: number;
     location: string;
     height: number;
     width: number;

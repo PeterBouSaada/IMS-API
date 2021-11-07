@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     let user: User = new User();
     user.username = this.username;
     user.password = this.password;
-    this._authService.login(user).subscribe((response) => {
+    this._authService.login(user)?.subscribe((response) => {
       if(response.status == 200)
       {
         localStorage.setItem("token", response.body.token);
