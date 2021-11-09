@@ -1,3 +1,17 @@
+
+app-table, .table-container {
+    display: block;
+    height: calc(100vh - 56px);
+}
+
+table {
+    overflow-y: auto;
+}
+
 .no-select {
     user-select: none;
+}
+
+.form-control {
+    width: 100%;
 }

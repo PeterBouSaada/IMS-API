@@ -15,4 +15,6 @@ export class Item {
     amperage: number;
     volatge: number;
     RPM: number;
+    
+    constructor() {}
 }

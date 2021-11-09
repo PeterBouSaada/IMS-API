@@ -38,7 +38,7 @@ namespace API.Controllers
             return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(items) { StatusCode = StatusCodes.Status400BadRequest };
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public IActionResult Add([FromBody] Item item)
         {
             Item addedItem = _itemService.AddItem(item);

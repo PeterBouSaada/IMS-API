@@ -1,7 +1,9 @@
 import { KeyValue } from '@angular/common';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from 'src/app/Models/Item';
+import { User } from 'src/app/Models/user';
 import { EventService } from 'src/app/services/Event/event.service';
 import { RequestService } from 'src/app/services/request/request.service';
 
@@ -16,11 +18,14 @@ export class TableComponent implements OnInit {
   @Input() caption: string;
   @Input() headers: string[];
   @Input() data: any[];
+  @Input() fields: any[];
   @Output() viewEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
   subscription : any;
 
-  constructor(private _eventService: EventService, private _routerService: Router, private _requestService: RequestService) {}
+  constructor(private _eventService: EventService, private _routerService: Router, private _requestService: RequestService) {
+    this.fields = new Array(30);
+  }
 
   ngOnInit(): void {
     this.subscription = this._eventService.subject.subscribe((data: string) =>
@@ -82,8 +87,53 @@ export class TableComponent implements OnInit {
       }
       return items;
     }
-    console.log(this.data);
     return this.data;
+  }
+
+  newObject()
+  {
+    console.log(this.fields);
+    let tempObject: any = new Object();
+    if(this._routerService.url == "/Inventory")
+    {
+      tempObject = new Item();
+    }
+    else if(this._routerService.url == "/Users")
+    {
+      tempObject = new User();
+    }
+
+    let i: number = 0;
+    for (let key in tempObject) {
+      tempObject.key = this.fields[i];
+      i++;
+    }
+
+    console.log(tempObject);
+
+    if(this._routerService.url == "/Inventory")
+    {
+      this._requestService.post("item/add", tempObject)?.subscribe((response) => {
+        if(response.status == 201)
+        {
+          console.log("created");
+          this.search("");
+        }
+      });
+    }
+    else if(this._routerService.url == "/Users")
+    {
+      this._requestService.post("user/add", tempObject)?.subscribe((response) => {
+        if(response.status == 201)
+        {
+          console.log("created");
+          this.search("");
+        }
+      });
+    }
+
+    
+
   }
 
   view(id : string)

@@ -13,7 +13,6 @@ namespace API.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string id { get; set; }
-
         [JsonProperty(PropertyName = "part_number")]
         [BsonElement("part_number")]
         public string partNumber { get; set; }

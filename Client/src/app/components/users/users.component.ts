@@ -17,4 +17,14 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  viewEvent(id: Event)
+  {
+    console.log("View Event on ID: " + id);
+  }
+
+  editEvent(id: Event)
+  {
+    console.log("Edit Event on ID: " + id);
+  }
+
 }
