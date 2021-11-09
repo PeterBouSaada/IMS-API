@@ -11,15 +11,16 @@ export class UsersComponent implements OnInit {
   caption : string = "User List";
   testData: Array<User> = []
   headers: Array<string> = ["ID", "Username", "Password", "Salt"];
+  API_string: string = "user";
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  viewEvent(id: Event)
+  deleteEvent(id: Event)
   {
-    console.log("View Event on ID: " + id);
+    console.log("Delete Event on ID: " + id);
   }
 
   editEvent(id: Event)

@@ -69,6 +69,27 @@ export class RequestService {
     return this._http.post<any>(API_URL, body, options);
   }
 
+  delete(endpoint:string) : Observable<HttpResponse<any>> | null | undefined
+  {
+    if(!this.isTokenValid())
+      return;
+    
+    let API_URL = this.buildURL(endpoint);
+    if(API_URL == null)
+      return;
+
+    let headers = new HttpHeaders({
+      Authorization: "Bearer " + localStorage.getItem("token")
+    });
+    let options = {
+      responseType: "json" as const,
+      observe: "response" as const,
+      headers: headers as HttpHeaders
+    }
+    
+    return this._http.delete<any>(API_URL, options);
+  }
+
   isTokenValid()
   {
     let token = localStorage.getItem("token")?.toString();

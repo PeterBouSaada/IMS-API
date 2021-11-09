@@ -68,11 +68,14 @@ namespace API.Classes
             {
                 if(ItemProperties[i].GetValue(item) != null)
                 {
-                    filters.Add(FilterBuilder.Eq(ItemProperties[i].Name ,ItemProperties[i].GetValue(item)));
+                    filters.Add(FilterBuilder.Regex(ItemProperties[i].Name, new BsonRegularExpression(ItemProperties[i].GetValue(item).ToString())));
                 }
             }
 
-            finalFilter = FilterBuilder.And(filters);
+            if (filters.Count() == 0)
+                return null;
+
+            finalFilter = FilterBuilder.Or(filters);
 
             return collection.Find(finalFilter).ToList();
         }

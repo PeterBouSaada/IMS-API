@@ -18,8 +18,9 @@ export class TableComponent implements OnInit {
   @Input() caption: string;
   @Input() headers: string[];
   @Input() data: any[];
+  @Input() API_string: string;
   @Input() fields: any[];
-  @Output() viewEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
   subscription : any;
 
@@ -37,36 +38,22 @@ export class TableComponent implements OnInit {
   search(data: string)
   {
     let route = this._routerService.url;
-    if(route == "/Inventory")
+
+    if(data.length < 1 || data == undefined)
     {
-      if(!(data.length > 1) || data == undefined)
-      {
-        this._requestService.get("item")?.subscribe(response => {
-          this.data = response.body;
-        });
-      }
-      else
-      {
-        this._requestService.post("item/search", {part_number: data})?.subscribe(response => {
-          this.data = response.body;
-        });
-      }
-    }
-    else if(route == "/Users")
-    {
-      if(!(data.length > 1) || data == undefined)
-      {
-      this._requestService.get("user")?.subscribe(response => {
+      this._requestService.get(this.API_string)?.subscribe(response => {
         this.data = response.body;
       });
-      }
-      else
-      {
-        this._requestService.post("user/search", {username: data})?.subscribe(response => {
-          this.data = response.body;
-        });
-      }
     }
+    else
+    {
+
+      let query = {salt: data, part_number: data};
+      this._requestService.post(this.API_string + "/search", query)?.subscribe(response => {
+        this.data = response.body;
+      });
+    }
+  
   }
 
   forLimit(num: number) {
@@ -92,53 +79,42 @@ export class TableComponent implements OnInit {
 
   newObject()
   {
-    console.log(this.fields);
     let tempObject: any = new Object();
-    if(this._routerService.url == "/Inventory")
+    if(this.API_string == "item")
     {
       tempObject = new Item();
     }
-    else if(this._routerService.url == "/Users")
+    else if(this.API_string == "user")
     {
       tempObject = new User();
     }
 
     let i: number = 0;
     for (let key in tempObject) {
-      tempObject.key = this.fields[i];
+      tempObject[key] = this.fields[i];
       i++;
     }
 
-    console.log(tempObject);
-
-    if(this._routerService.url == "/Inventory")
-    {
-      this._requestService.post("item/add", tempObject)?.subscribe((response) => {
+      this._requestService.post(this.API_string + "/add", tempObject)?.subscribe((response) => {
         if(response.status == 201)
         {
           console.log("created");
           this.search("");
         }
       });
-    }
-    else if(this._routerService.url == "/Users")
-    {
-      this._requestService.post("user/add", tempObject)?.subscribe((response) => {
-        if(response.status == 201)
-        {
-          console.log("created");
-          this.search("");
-        }
-      });
-    }
-
     
-
+      this.fields = [];
   }
 
-  view(id : string)
+  del(id : string)
   {
-    this.viewEvent.emit(id);
+    this._requestService.delete(this.API_string + "/" + id)?.subscribe(response => {
+      if(response.status == 200)
+      {
+        console.log("Deleted: \n" + response.body);
+        this.search("");
+      }
+    });
   }
 
   edit(id : string)

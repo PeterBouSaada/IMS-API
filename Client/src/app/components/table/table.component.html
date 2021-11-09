@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <td *ngFor="let prop of headers; let i = index">
-                    <input type="text" class="form-control" [(ngModel)]="fields[i]">
+                    <input *ngIf="prop != 'ID' && prop != 'Salt'" type="text" class="form-control" [(ngModel)]="fields[i]">
                 </td>
                 <td>
                     <button oncopy="return false" oncut="return false" onpaste="return false"  (click)="newObject()" class="no-select float-right ml-md-4 btn btn-sm btn-success">Add</button>
@@ -24,7 +24,7 @@
                 </ng-template>
                 <ng-template #print>
                     <td scope="row" *ngFor="let p of field | keyvalue: originalOrder">{{ p.value }}</td>
-                    <td scope="row" style="min-width: 200px"><button *ngIf="field.id != null" (click)="edit(field.id)" class="no-select float-right ml-md-4 btn btn-sm btn-outline-primary">Edit</button><button oncopy="return false" oncut="return false" onpaste="return false" (click)="view(field.id)" *ngIf="field.id != null" class="no-select float-right btn btn-sm btn-outline-success">View</button></td>
+                    <td scope="row" style="min-width: 200px"><button oncopy="return false" oncut="return false" onpaste="return false" (click)="del(field.id)" *ngIf="field.id != null" class="no-select float-right ml-md-4 btn btn-sm btn-outline-danger">Delete</button><button *ngIf="field.id != null" (click)="edit(field.id)" class="no-select float-right btn btn-sm btn-outline-primary">Edit</button></td>
                 </ng-template>
             </tr>
         </tbody>

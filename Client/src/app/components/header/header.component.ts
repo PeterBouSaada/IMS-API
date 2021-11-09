@@ -10,7 +10,7 @@ import { EventService } from 'src/app/services/Event/event.service';
 export class HeaderComponent implements OnInit {
 
   route : string;
-  @Input() searchQuery: string;
+  @Input() searchQuery: string = "";
 
   constructor(private _router: Router, private _eventService: EventService) {
     this.getRoute();
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
 
   searchClicked()
   {
+    console.log(this.searchQuery);
     this._eventService.setSearch(this.searchQuery);
   }
 

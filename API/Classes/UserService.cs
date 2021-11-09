@@ -85,8 +85,10 @@ namespace API.Classes
                     filters.Add(FilterBuilder.Regex(ItemProperties[i].Name, new BsonRegularExpression(ItemProperties[i].GetValue(user).ToString())));
             }
 
-            finalFilter = FilterBuilder.And(filters);
+            if (filters.Count() == 0)
+                return null;
 
+            finalFilter = FilterBuilder.Or(filters);
             return collection.Find(finalFilter)?.ToList();
         }
 
