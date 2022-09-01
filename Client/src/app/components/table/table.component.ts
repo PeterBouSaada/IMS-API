@@ -48,7 +48,7 @@ export class TableComponent implements OnInit {
     else
     {
 
-      let query = {salt: data, part_number: data};
+      let query = {username: data, part_number: data};
       this._requestService.post(this.API_string + "/search", query)?.subscribe(response => {
         this.data = response.body;
       });
