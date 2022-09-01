@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <td *ngFor="let prop of headers; let i = index">
-                    <input *ngIf="prop != 'ID' && prop != 'Salt'" type="text" class="form-control" [(ngModel)]="fields[i]">
+                    <input *ngIf="prop != 'ID (temp)' && prop != 'Salt'" type="text" class="form-control" [(ngModel)]="fields[i]">
                 </td>
                 <td>
                     <button oncopy="return false" oncut="return false" onpaste="return false"  (click)="newObject()" class="no-select float-right ml-md-4 btn btn-sm btn-success">Add</button>
