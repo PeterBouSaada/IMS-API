@@ -1,5 +1,4 @@
 export class Item {
-    _id: string;
     part_number: string;
     type: string;
     qty_on_hand: number;
@@ -17,7 +16,6 @@ export class Item {
     RPM: number;
     
     constructor() {
-        this._id = "";
         this.part_number = "";
         this.type = "";
         this.qty_on_hand = 0;

@@ -24,7 +24,7 @@
                 </ng-template>
                 <ng-template #print>
                     <td scope="row" *ngFor="let p of field | keyvalue: originalOrder">{{ p.value }}</td>
-                    <td scope="row" style="min-width: 200px"><button oncopy="return false" oncut="return false" onpaste="return false" (click)="del(field.id)" *ngIf="field.id != null" class="no-select float-right ml-md-4 btn btn-sm btn-outline-danger">Delete</button><button *ngIf="field.id != null" (click)="edit(field.id)" class="no-select float-right btn btn-sm btn-outline-primary">Edit</button></td>
+                    <td scope="row" style="min-width: 200px"><button oncopy="return false" oncut="return false" onpaste="return false" (click)="del(this.data[i].id)" *ngIf="this.data[i].id != null" class="no-select float-right ml-md-4 btn btn-sm btn-outline-danger">Delete</button><button *ngIf="this.data[i].id != null" (click)="edit(this.data[i].id)" class="no-select float-right btn btn-sm btn-outline-primary">Edit</button></td>
                 </ng-template>
             </tr>
         </tbody>

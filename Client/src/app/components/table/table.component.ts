@@ -1,5 +1,4 @@
 import { KeyValue } from '@angular/common';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Item } from 'src/app/Models/Item';
@@ -23,9 +22,11 @@ export class TableComponent implements OnInit {
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
   @Output() editEvent: EventEmitter<any> = new EventEmitter();
   subscription : any;
+  viewData: any[];
 
   constructor(private _eventService: EventService, private _routerService: Router, private _requestService: RequestService) {
     this.fields = new Array(30);
+    this.viewData = [];
   }
 
   ngOnInit(): void {
@@ -42,31 +43,51 @@ export class TableComponent implements OnInit {
     if(data.length < 1 || data == undefined)
     {
       this._requestService.get(this.API_string)?.subscribe(response => {
-        this.data = response.body;
+        this.data = []
+        this.viewData = []
+        response.body.forEach((element: any) => {
+          this.data.push(Object.assign({},element));
+          this.viewData.push(Object.assign({},element));
+        });
+        for(var row in this.viewData)
+        {
+          delete this.viewData[row]["id"];
+        }
+        console.log(this.data);
+        console.log(this.viewData);
       });
     }
     else
     {
-
       let query = {username: data, part_number: data};
       this._requestService.post(this.API_string + "/search", query)?.subscribe(response => {
-        this.data = response.body;
-        console.log(response.body);
+        this.data = []
+        this.viewData = []
+        response.body.forEach((element: any) => {
+          this.data.push(Object.assign({},element));
+          this.viewData.push(Object.assign({},element));
+        });
+        for(var row in this.viewData)
+        {
+          delete this.viewData[row]["id"];
+        }
+        console.log(this.data);
+        console.log(this.viewData);
       });
     }
   
   }
 
   forLimit(num: number) {
-    if(num > this.data.length)
+    if(num > this.viewData.length)
     {
       let items: any[] = [];
       let i: number;
       for(i = 0; i < num; i++)
       {
-        if (i < this.data.length)
+        if (i < this.viewData.length)
         {
-         items[i] = this.data[i];
+         items[i] = this.viewData[i];
         }
         else 
         {
@@ -75,7 +96,7 @@ export class TableComponent implements OnInit {
       }
       return items;
     }
-    return this.data;
+    return this.viewData;
   }
 
   newObject()
@@ -95,7 +116,7 @@ export class TableComponent implements OnInit {
       tempObject[key] = this.fields[i];
       i++;
     }
-
+    console.log(tempObject);
       this._requestService.post(this.API_string + "/add", tempObject)?.subscribe((response) => {
         if(response.status == 201)
         {
@@ -104,6 +125,7 @@ export class TableComponent implements OnInit {
         }
       });
     
+      console.log(this.fields);
       this.fields = [];
   }
 
