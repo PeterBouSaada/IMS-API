@@ -18,4 +18,8 @@ In visual studio, click on the run dropdown, then select `API`
 
 \- Open a new terminal window and navigate to `/Client`
 
+\- Run `npm install`, this should install all the dependencies required to run this application
+
+\- Run `npm install -g @angular/cli`
+
 \- Run the command `ng serve`
