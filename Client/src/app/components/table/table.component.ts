@@ -116,6 +116,7 @@ export class TableComponent implements OnInit {
       tempObject[key] = this.fields[i];
       i++;
     }
+    // testing
     console.log(tempObject);
       this._requestService.post(this.API_string + "/add", tempObject)?.subscribe((response) => {
         if(response.status == 201)
