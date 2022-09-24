@@ -1,25 +1,24 @@
-### Set up
-\- Open the .sln file in visual studio 2022 or newer with .net sdk 6.0 support.
+# README
 
-\- Copy the `appsettings.Environment.json` file and rename to `appsettings.Development.json`
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-fill in the appropriate information:
+Things you may want to cover:
 
-\- `Database` is the mongoDB connection string.
+* Ruby version
 
-\- `Private_Key` is the JWT token secret key that should remain serverside and private.
+* System dependencies
 
-\- `Expires_In` is the time that the token is valid for.
+* Configuration
 
-##### Running the server
-In visual studio, click on the run dropdown, then select `API`
+* Database creation
 
-##### Running the frontend
+* Database initialization
 
-\- Open a new terminal window and navigate to `/Client`
+* How to run the test suite
 
-\- Run `npm install`, this should install all the dependencies required to run this application
+* Services (job queues, cache servers, search engines, etc.)
 
-\- Run `npm install -g @angular/cli`
+* Deployment instructions
 
-\- Run the command `ng serve`
+* ...
