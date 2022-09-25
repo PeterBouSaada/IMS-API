@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Parts</h1>
-
-<div id="parts">
+<table id="parts" class="table table-striped" style="margin: 0px 5px 0px 5px;">
+  <tr class="row table-dark">
+    <th scope="col" class="col p-3">Number</th>
+    <th scope="col" class="col p-3">Category</th>
+    <th scope="col" class="col p-3">Machine</th>
+    <th scope="col" class="col p-3">Qty</th>
+  </tr>
   <% @parts.each do |part| %>
     <%= render part %>
-    <p>
-      <%= link_to "Show this part", part %>
-    </p>
   <% end %>
-</div>
-
+</table>
 <%= link_to "New part", new_part_path %>

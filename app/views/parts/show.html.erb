@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @part %>
-
+<table id="parts" class="table table-striped" style="margin: 0px 5px 0px 5px;">
+  <tr class="row table-dark">
+    <th scope="col" class="col p-3">Number</th>
+    <th scope="col" class="col p-3">Category</th>
+    <th scope="col" class="col p-3">Machine</th>
+    <th scope="col" class="col p-3">Qty</th>
+  </tr>
+  <%= render @part %>
+</table>
 <div>
-  <%= link_to "Edit this part", edit_part_path(@part) %> |
-  <%= link_to "Back to parts", parts_path %>
-
-  <%= button_to "Destroy this part", @part, method: :delete %>
+  <%= link_to "Edit this part", edit_part_path(@part) , class: "link-primary"%> |
+  <%= link_to "Back to parts", parts_path , class: "centered"%>
+  <%= button_to "Destroy this part", @part, method: :delete, class: "btn btn-danger" %>
 </div>

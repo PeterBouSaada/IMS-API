@@ -1,17 +1,18 @@
-<div id="<%= dom_id part %>">
-  <p>
-    <strong>Number:</strong>
-    <%= part.number %>
-  </p>
+<tr id="<%= dom_id part %>" class="row">
+  <td class="col p-3" >
+    <%= link_to part.number, "/parts/#{part.id}" %>
+  </td>
 
-  <p>
-    <strong>category:</strong>
+  <td class="col p-3">
     <%= part.category %>
-  </p>
+  </td>
 
-  <p>
-    <strong>Machine:</strong>
+  <td class="col p-3">
     <%= link_to part.machine.name, "/machines/#{part.machine.id}" %>
-  </p>
+  </td>
 
-</div>
+  <td class="col p-3">
+    0
+  </td>
+
+</tr>

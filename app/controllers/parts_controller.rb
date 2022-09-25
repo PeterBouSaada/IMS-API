@@ -1,5 +1,6 @@
 class PartsController < ApplicationController
   before_action :set_part, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /parts or /parts.json
   def index

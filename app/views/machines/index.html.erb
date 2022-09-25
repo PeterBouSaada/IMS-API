@@ -1,14 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Machines</h1>
-
-<div id="machines">
+<table id="parts" class="table table-striped" style="margin: 0px 5px 0px 5px;">
+  <tr class="row table-dark">
+    <th scope="col" class="col p-3">Name</th>
+    <th scope="col" class="col p-3">Location</th>
+    <th scope="col" class="col p-3">Picture</th>
+  </tr>
   <% @machines.each do |machine| %>
     <%= render machine %>
-    <p>
-      <%= link_to "Show this machine", machine %>
-    </p>
   <% end %>
-</div>
-
+</table>
 <%= link_to "New machine", new_machine_path %>
