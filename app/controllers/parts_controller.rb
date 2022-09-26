@@ -2,9 +2,10 @@ class PartsController < ApplicationController
   before_action :set_part, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
+  $number_sort_direction = "ASC"
   # GET /parts or /parts.json
   def index
-    @parts = Part.all
+    @parts = Part.order(params[:sort])
   end
 
   # GET /parts/1 or /parts/1.json

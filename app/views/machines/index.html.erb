@@ -1,7 +1,7 @@
-<table id="parts" class="table table-striped" style="margin: 0px 5px 0px 5px;">
-  <tr class="row table-dark">
-    <th scope="col" class="col p-3">Name</th>
-    <th scope="col" class="col p-3">Location</th>
+<table id="parts" class="table table-striped">
+  <tr class="table-dark">
+    <th scope="col" class="col p-3"><%= link_to "Name", {:sort => "name"}, class: "no-link" %></th>
+    <th scope="col" class="col p-3"><%= link_to "Location", {:sort => "location"}, class: "no-link" %></th>
     <th scope="col" class="col p-3">Picture</th>
   </tr>
   <% @machines.each do |machine| %>

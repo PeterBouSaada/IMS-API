@@ -6,5 +6,11 @@ module ApplicationHelper
       ''
     end
   end
-
+  def is_part_of_path(path)
+    if request.path.start_with?(path)
+      true
+    else
+      false
+    end
+  end
 end
