@@ -1,10 +1,8 @@
-/**/API/appsettings.Development.json
-/**/.vs
-/**/API/bin
-/**/API/obj
-/**/Client*/bin
-/**/Client*/obj
 *.dll
 *.pdb
 *.cache
 *.v2
+tmp/
+log/
+.DS_Store
+

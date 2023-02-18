@@ -1,0 +1,185 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+/*
+ * Variable declaration
+ */
+
+:root {
+    --width: 30%;
+    --height: 95%;
+    --min-height: 40px;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.singular-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: var(--width);
+    height: var(--height);
+    margin: calc((100% - var(--height)) / 2) auto;
+}
+
+.singular-grouping {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.singular-row {
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    border-bottom: 1px solid black;
+    color: #212520;
+    min-height: var(--min-height);
+}
+
+.singular-row:nth-child(even) {
+    background-color: rgba(0,0,0, 0.05);
+}
+.singular-row:last-of-type {
+    border-bottom: none;
+}
+
+.singular-left {
+    display: inline-block;
+    height: 100%;
+    float: left;
+    text-align: left;
+    padding:5px;
+    width: 50%;
+    line-height: var(--min-height);
+}
+
+.singular-right {
+    display: inline-block;
+    height: 100%;
+    float: right;
+    text-align: right;
+    padding: 5px;
+    width: 50%;
+    line-height: var(--min-height);
+}
+
+.singular-full {
+    display: block;
+    float: left;
+    width: 100%;
+    height: 100%;
+    line-height: var(--min-height);
+}
+
+.btn-inline {
+    display: inline;
+    float: left;
+    margin: 4px;
+}
+
+.btn-inline-right {
+    display:inline;
+    float: right;
+    margin: 4px;
+}
+
+.no-link {
+    color: #fff;
+    text-decoration: none;
+}
+
+.no-link:hover {
+    color: rgb(170,170,170);
+}
+
+.remove-button {
+    outline: none;
+    padding: 5px;
+    border: 0px;
+    box-sizing: none;
+    background-color: transparent;
+}
+
+.table-card {
+    background-color: #fff;
+    height: 10px;
+    margin:0!important;
+    padding: 0!important;
+}
+
+.inner-table-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.left-col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border-right: 2px solid white;
+    width: 20%;
+    margin-bottom: 5px;
+}
+
+.middle-col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    border-right: 2px solid white;
+    width: 40%;
+    margin-bottom: 5px;
+}
+
+.right-col {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    width: 40%;
+    margin-bottom: 5px;
+}
+
+span.right {
+    float: right;
+    text-align: right;
+}
+
+.button-layout {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+.value {
+    padding: 0 10px;
+}
+.value:nth-of-type(even) {
+    background-color: #212529;
+}
