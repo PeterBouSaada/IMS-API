@@ -3,3 +3,5 @@
 API/bin/*
 
 API/obj/*
+
+*/appsettings.Development.json
