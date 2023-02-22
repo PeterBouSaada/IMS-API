@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using System.Collections.Specialized;
 
 namespace API.Controllers
 {
@@ -35,7 +36,7 @@ namespace API.Controllers
         public IActionResult Search(User user)
         {
             List<User> users = _userService.FindUser(user);
-            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(users) { StatusCode = StatusCodes.Status400BadRequest }; ;
+            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(users) { StatusCode = StatusCodes.Status400BadRequest };
         }
 
         [HttpPost("add")]
@@ -52,10 +53,10 @@ namespace API.Controllers
             return deletedUser != null ? new ObjectResult(deletedUser) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(deletedUser) { StatusCode = StatusCodes.Status400BadRequest };
         }
 
-        [HttpPut("update")]
-        public IActionResult Update([FromBody] User user)
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, [FromBody] User user)
         {
-            User updatedUser = _userService.UpdateUser(user);
+            User updatedUser = _userService.UpdateUser(id, user);
             return updatedUser != null ? new ObjectResult(updatedUser) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(updatedUser) { StatusCode = StatusCodes.Status400BadRequest };
         }
         

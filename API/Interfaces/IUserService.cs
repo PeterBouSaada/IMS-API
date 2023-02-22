@@ -9,7 +9,7 @@ namespace API.Interfaces
     public interface IUserService
     {
         User AddUser(User user);
-        User UpdateUser(User user);
+        User UpdateUser(string id, User user);
         User DeleteUser(string id);
         List<User> FindUser(User user);
         User FindOneUser(string id);

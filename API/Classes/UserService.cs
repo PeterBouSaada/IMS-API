@@ -92,9 +92,13 @@ namespace API.Classes
             return collection.Find(finalFilter)?.ToList();
         }
 
-        public User UpdateUser(User user)
+        public User UpdateUser(string id, User user)
         {
-            User OldUser = collection.Find(f => f.id == user.id).FirstOrDefault();
+            // reject the request if the body is missing the id, or if the id in the url and the id in the body do not match * this means the http request was tampered with *
+            if (user.id == null || user.id != id)
+                return null;
+
+            User OldUser = collection.Find(f => f.id == id).FirstOrDefault();
             UpdateDefinitionBuilder<User> UpdateBuilder = Builders<User>.Update;
             PropertyInfo[] UserProperties = user.GetType().GetProperties();
             PropertyInfo[] OldUserProperties = OldUser.GetType().GetProperties();
