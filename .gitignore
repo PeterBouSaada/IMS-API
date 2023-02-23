@@ -1,7 +1,7 @@
 .vs/*
 
-API/bin/*
+*/bin/*
 
-API/obj/*
+*/obj/*
 
 */appsettings.Development.json

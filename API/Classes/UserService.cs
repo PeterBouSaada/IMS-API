@@ -148,6 +148,7 @@ namespace API.Classes
 
         private void HashPassword(User user)
         {
+
             FilterDefinition<User> filter;
             // This means we are trying to authenticate the user
             if (user.id == null && user.username != null)

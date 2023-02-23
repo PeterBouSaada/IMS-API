@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace API
 {
-    public class Program
+    public partial class Program
     {
         public static void Main(string[] args) =>
             CreateHostBuilder(args).Build().Run();

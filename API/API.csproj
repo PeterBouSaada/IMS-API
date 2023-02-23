@@ -7,19 +7,20 @@
     <StartupObject />
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Win32Resource />
+    <UserSecretsId>8b533271-eb86-48f6-b59e-b8c094402ab1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-
+    <InternalsVisibleTo Include="MyTestProject" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.8" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.17.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.22.1" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <None Include="$(AppData)\microsoft\UserSecrets\$(UserSecretsId)\secrets.json" Link="secrets.json" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
-
-
 </Project>
