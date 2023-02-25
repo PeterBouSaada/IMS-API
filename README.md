@@ -9,15 +9,10 @@
 ### **Table Explanation:**
 
 **Endpoint:** the path of the request.<br/>
-
 **Request Method:** HTTP request method to use.<br/>
-
 **Authorized:** Requires an Authorization header with a Bearer Token.<br/>
-
 **Return On Success:** HTTP Response status code on success. <br/>
-
 **Return On Failure:** HTTP Response status code on failure. <br/>
-
 **Example Success Return:** JSON Response body on successful return. <br/>
 
 <br/>
@@ -59,8 +54,7 @@
 
 ### **Windows:**
 
-\- Open the command line with administrator privileges.
-
+\- Open the command line with administrator privileges.<br/>
 \- use the following commands (make sure to add the `"quotes"`): <br/>
 
 | command                                                 | effect                                                                                                                                                              |
@@ -73,11 +67,9 @@
 
 ### **Mac/Linux:**
 
-\- Open a terminal window.
-
-\- Navigate to ~ using the command `cd ~`
-
-\- Edit the `.profile` file using any editor, you can use vim using `vim .profile` from the terminal and add the following commands to the end (on seperate lines, and without any `"quotes"`):
+\- Open a terminal window.<br/>
+\- Navigate to ~ using the command `cd ~`<br/>
+\- Edit the `.profile` file using any editor, you can use vim using `vim .profile` from the terminal and add the following commands to the end (on seperate lines, and without any `"quotes"`):<br/>
 
 | command                                              | effect                                                                                                                                                              |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -92,14 +84,12 @@
 
 ## <u>Running the xUnit tests</u>
 
-\- Open the `IMS.sln` file in visual studio 2022 or newer with .net sdk 6.0 support.
-
-In visual studio click on the run dropdown, then select `API.xUnitTests`
+\- Open the `IMS.sln` file in visual studio 2022 or newer with .net sdk 6.0 support. <br/>
+\- In visual studio, right click on the `API.xUnitTests` project then click `Run Tests`
 
 <br/>
 
 ## <u>Running the Server</u>
 
-\- Open the `IMS.sln` file in visual studio 2022 or newer with .net sdk 6.0 support.
-
-In visual studio, click on the run dropdown, then select `API`
+\- Open the `IMS.sln` file in visual studio 2022 or newer with .net sdk 6.0 support. <br/>
+\- In visual studio, click on the run dropdown, then select `API`
