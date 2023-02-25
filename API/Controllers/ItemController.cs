@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("API/[controller]")]
+    [Route("[controller]s")]
     public class ItemController : ControllerBase
     {
         private readonly IItemService _itemService;
@@ -28,42 +28,42 @@ namespace API.Controllers
         {
             
             Item foundItem = _cacheService.GetOrSet("item_" + id, 60 * 4, () => _itemService.FindOneItem(id)); ;
-            return foundItem != null ? new ObjectResult(foundItem) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(foundItem) { StatusCode = StatusCodes.Status400BadRequest };
+            return foundItem != null ? new ObjectResult(foundItem) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPost("search")]
         public IActionResult Search(Item item)
         {
             List<Item> items = _itemService.FindItem(item);
-            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(items) { StatusCode = StatusCodes.Status400BadRequest };
+            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPost("add")]
         public IActionResult Add([FromBody] Item item)
         {
             Item addedItem = _itemService.AddItem(item);
-            return addedItem != null ? new ObjectResult(addedItem) { StatusCode = StatusCodes.Status201Created } : new ObjectResult(addedItem) { StatusCode = StatusCodes.Status400BadRequest };
+            return addedItem != null ? new ObjectResult(addedItem) { StatusCode = StatusCodes.Status201Created } : BadRequest();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             Item deletedItem = _itemService.DeleteItem(id);
-            return deletedItem != null ? new ObjectResult(deletedItem) { StatusCode = StatusCodes.Status200OK} : new ObjectResult(deletedItem) { StatusCode = StatusCodes.Status400BadRequest };
+            return deletedItem != null ? Ok() : BadRequest();
         }
 
         [HttpPut]
         public IActionResult Update([FromBody] Item item)
         {
             Item updatedItem = _itemService.UpdateItem(item);
-            return updatedItem != null ? new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status400BadRequest };
+            return updatedItem != null ? new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpGet]
         public IActionResult getAll()
         {
             List<Item> items = _itemService.getAllItems();
-            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(items) { StatusCode = StatusCodes.Status400BadRequest };
+            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
     }
 }

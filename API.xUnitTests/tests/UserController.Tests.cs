@@ -71,7 +71,7 @@ namespace API.xUnitTests
             string userAsString = user.ToJson();
 
             var content = new StringContent(userAsString, Encoding.UTF8, "application/json");
-            var apiResponse = await client.PostAsync("API/user/Authenticate", content);
+            var apiResponse = await client.PostAsync("users/Authenticate", content);
 
             Assert.True(apiResponse.IsSuccessStatusCode);
 
@@ -92,7 +92,7 @@ namespace API.xUnitTests
         {
             CheckAndSetToken();
 
-            var apiResponse = await client.GetAsync("API/user");
+            var apiResponse = await client.GetAsync("users");
 
             Assert.True(apiResponse.IsSuccessStatusCode);
 
@@ -113,7 +113,7 @@ namespace API.xUnitTests
 
             var id = "63f6d683e53eb32d4e21c079";
 
-            var apiResponse = await client.GetAsync("API/user/" + id);
+            var apiResponse = await client.GetAsync("users/" + id);
 
             Assert.True(apiResponse.IsSuccessStatusCode);
             var responseValue = await apiResponse.Content.ReadAsStringAsync();
@@ -143,7 +143,7 @@ namespace API.xUnitTests
             var userAsString = requestUser.ToJson();
 
             var content = new StringContent(userAsString, Encoding.UTF8, "application/json");
-            var apiResponse = await client.PostAsync("API/user/search", content);
+            var apiResponse = await client.PostAsync("users/search", content);
             Assert.True(apiResponse.IsSuccessStatusCode);
 
             var responseValue = await apiResponse.Content.ReadAsStringAsync();

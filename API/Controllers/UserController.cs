@@ -14,7 +14,7 @@ namespace API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("API/[controller]")]
+    [Route("[controller]s")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -28,43 +28,41 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
-            User foundUser = _cacheService.GetOrSet("user_" + id, 60 * 4 , () => _userService.FindOneUser(id));
-            return foundUser != null ? new ObjectResult(foundUser) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(foundUser) { StatusCode = StatusCodes.Status400BadRequest };
+            User foundUser = _cacheService.GetOrSet("user_" + id, 60 * 4, () => _userService.FindOneUser(id));
+            return foundUser != null ? new ObjectResult(foundUser) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
-
-        [HttpPost("search")]
-        public IActionResult Search(User user)
+        ActionResult Search(User user)
         {
             List<User> users = _userService.FindUser(user);
-            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(users) { StatusCode = StatusCodes.Status400BadRequest };
+            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPost("add")]
         public IActionResult Add([FromBody] User user)
         {
             User addedUser = _userService.AddUser(user);
-            return addedUser != null ? new ObjectResult(addedUser) { StatusCode = StatusCodes.Status201Created } : new ObjectResult(addedUser) { StatusCode = StatusCodes.Status400BadRequest };
+            return addedUser != null ? new ObjectResult(addedUser) { StatusCode = StatusCodes.Status201Created } : BadRequest();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
             User deletedUser = _userService.DeleteUser(id);
-            return deletedUser != null ? new ObjectResult(deletedUser) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(deletedUser) { StatusCode = StatusCodes.Status400BadRequest };
+            return deletedUser != null ? Ok() : BadRequest();
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(string id, [FromBody] User user)
         {
             User updatedUser = _userService.UpdateUser(id, user);
-            return updatedUser != null ? new ObjectResult(updatedUser) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(updatedUser) { StatusCode = StatusCodes.Status400BadRequest };
+            return updatedUser != null ? new ObjectResult(updatedUser) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
         
         [HttpGet]
         public IActionResult getAll()
         {
             List<User> users = _userService.getAllUsers();
-            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : new ObjectResult(users) { StatusCode = StatusCodes.Status400BadRequest };
+            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [AllowAnonymous]
