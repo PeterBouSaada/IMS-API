@@ -26,7 +26,7 @@ namespace API.Classes
         {
             this._configuration = config;
             this._JWTAuthenticationService = JWTAuthService;
-            MongoDatabase = _configuration.GetConnectionString("Database");
+            MongoDatabase = Environment.GetEnvironmentVariable("MONGO_STRING", EnvironmentVariableTarget.Machine);
             dbClient = new MongoClient(MongoDatabase);
             database = dbClient.GetDatabase("IMS");
             collection = database.GetCollection<User>("users");

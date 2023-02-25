@@ -75,8 +75,8 @@ namespace API.xUnitTests
 
             Assert.True(apiResponse.IsSuccessStatusCode);
 
-            var responseContent = await apiResponse.Content.ReadAsStringAsync();
-            var deserializedResponseContent = Newtonsoft.Json.JsonConvert.DeserializeObject<String>(responseContent);
+            var responseValue = await apiResponse.Content.ReadAsStringAsync();
+            var deserializedResponseContent = Newtonsoft.Json.JsonConvert.DeserializeObject<String>(responseValue);
 
             Assert.True(deserializedResponseContent != null);
 
@@ -90,19 +90,17 @@ namespace API.xUnitTests
         [Fact]
         public async void UserController_GetRequestToUsersGetAllEndpointAndCheckResponseSuccessStatus()
         {
-            Assert.True(tokenIsValid);
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            CheckAndSetToken();
 
             var apiResponse = await client.GetAsync("API/user");
 
             Assert.True(apiResponse.IsSuccessStatusCode);
 
-            var content = await apiResponse.Content.ReadAsStringAsync();
+            var responseValue = await apiResponse.Content.ReadAsStringAsync();
 
-            Assert.True(content != null);
+            Assert.True(responseValue != null);
 
-            User[]? users = Newtonsoft.Json.JsonConvert.DeserializeObject<User[]>(content);
+            User[]? users = Newtonsoft.Json.JsonConvert.DeserializeObject<User[]>(responseValue);
             
             Assert.True(users != null && users.Length > 0);
 
@@ -111,25 +109,66 @@ namespace API.xUnitTests
         [Fact]
         public async void UserController_GetRequestToUsersGetByIdEndpointAndCheckResponseSuccessStatus()
         {
-            Assert.True(tokenIsValid);
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            CheckAndSetToken();
 
             var id = "63f6d683e53eb32d4e21c079";
 
             var apiResponse = await client.GetAsync("API/user/" + id);
 
             Assert.True(apiResponse.IsSuccessStatusCode);
-            var content = await apiResponse.Content.ReadAsStringAsync();
+            var responseValue = await apiResponse.Content.ReadAsStringAsync();
 
-            Assert.True(content != null);
+            Assert.True(responseValue != null);
 
-            User? user = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(content);
+            User? user = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(responseValue);
 
             Assert.True(user != null);
             Assert.True(user.username == "testUser");
+            output.WriteLine("user.id = " + user.id);
+            output.WriteLine("user.username = " + user.username);
+            output.WriteLine("user.password = " + user.password);
+            output.WriteLine("user.salt = " + user.salt);
+        }
+
+
+        // TODO: Expand this test to include multiple usernames.
+        [Fact]
+        public async void UserController_PostRequestToUsersSearchEndpointAndCheckResponseSuccessStatus()
+        {
+            CheckAndSetToken();
+
+            User requestUser = new User();
+            requestUser.username = "testUser";
+
+            var userAsString = requestUser.ToJson();
+
+            var content = new StringContent(userAsString, Encoding.UTF8, "application/json");
+            var apiResponse = await client.PostAsync("API/user/search", content);
+            Assert.True(apiResponse.IsSuccessStatusCode);
+
+            var responseValue = await apiResponse.Content.ReadAsStringAsync();
+            Assert.True(responseValue != null);
+
+            User[]? users = Newtonsoft.Json.JsonConvert.DeserializeObject<User[]>(responseValue);
+            Assert.True(users != null);
+
+            User user = users[0];
+            Assert.True(user != null);
+            Assert.True(user.id != null);
+            Assert.True(user.username != null);
+            Assert.True(user.password != null);
+            Assert.True(user.salt != null);
         }
 
         #endregion Tests
+
+        #region Helper Functions
+        private void CheckAndSetToken()
+        {
+            Assert.True(tokenIsValid);
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        }
+        #endregion Helper Functions
     }
 };

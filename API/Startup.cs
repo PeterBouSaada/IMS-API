@@ -35,7 +35,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            string key = Configuration.GetSection("JWTTokenData").GetSection("Private_Key").Value;
+            string key = Environment.GetEnvironmentVariable("JWT_PRIVATE_KEY", EnvironmentVariableTarget.Machine);
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddCors(

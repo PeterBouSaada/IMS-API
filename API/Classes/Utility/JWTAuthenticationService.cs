@@ -14,21 +14,20 @@ namespace API.Classes.Utility
 {
     public class JWTAuthenticationService : IJWTAuthenticationService
     {
-        private IConfiguration configuration;
         private string privateKey;
         private double expireTime;
+        private JwtSecurityTokenHandler _handler;
 
-        public JWTAuthenticationService(IConfiguration config)
+        public JWTAuthenticationService()
         {
-            configuration = config;
-            IConfigurationSection JWTData = configuration.GetSection("JWTTokenData");
-            privateKey = JWTData.GetSection("Private_Key").Value;
-            expireTime = Convert.ToDouble(JWTData.GetSection("Expires_In").Value);
+            privateKey = Environment.GetEnvironmentVariable("JWT_PRIVATE_KEY", EnvironmentVariableTarget.Machine);
+            expireTime = Convert.ToDouble(Environment.GetEnvironmentVariable("JWT_EXPIRES_IN", EnvironmentVariableTarget.Machine));
+            _handler = new JwtSecurityTokenHandler();
         }
 
         public string CreateJWTToken(User user)
         {
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            
             byte[] key = Encoding.ASCII.GetBytes(privateKey);
             SecurityTokenDescriptor descriptor = new SecurityTokenDescriptor() {
                 Subject = new ClaimsIdentity(new Claim[] {
@@ -37,8 +36,30 @@ namespace API.Classes.Utility
                 Expires = DateTime.UtcNow.AddHours(expireTime),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             };
-            SecurityToken token = handler.CreateToken(descriptor);
-            return handler.WriteToken(token);
+            SecurityToken token = _handler.CreateToken(descriptor);
+            return _handler.WriteToken(token);
+        }
+
+        public bool isJWTTokenValid(string token)
+        {
+        
+            var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(privateKey));
+
+            try
+            {
+                _handler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = mySecurityKey
+                }, out SecurityToken validatedToken);
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using API.Classes.Utility;
 using API.Interfaces;
 using API.Models;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -13,6 +17,7 @@ namespace API.xUnitTests.Auth
 
         private IJWTAuthenticationService AuthService;
         public string token { get; private set; }
+
 
         private static Authorizer? Instance = null;
 
@@ -28,20 +33,14 @@ namespace API.xUnitTests.Auth
         {
             token = "";
 
-            var settingPath = "../../../../API";
 
-            var absolutePath = System.IO.Path.GetFullPath(settingPath);
-
-            var builder = new ConfigurationBuilder().SetBasePath(absolutePath).AddJsonFile("appsettings.Development.json", false, true);
-
-            var config = builder.Build();
-
-            AuthService = new JWTAuthenticationService(config);
+            AuthService = new JWTAuthenticationService();
         }
 
         public string? GetToken()
         {
-            if (token != null) return token;
+            
+            if (token != null && AuthService.isJWTTokenValid(token)) return token;
 
             User user = new User();
             user.username = "testUser";

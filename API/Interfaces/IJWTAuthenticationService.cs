@@ -9,5 +9,6 @@ namespace API.Interfaces
     public interface IJWTAuthenticationService
     {
         string CreateJWTToken(User user);
+        bool isJWTTokenValid(string token);
     }
 }

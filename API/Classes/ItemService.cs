@@ -24,7 +24,7 @@ namespace API.Classes
         public ItemService(IConfiguration config, ICache<Item> cache)
         {
             this.configuration = config;
-            MongoDatabase = configuration.GetConnectionString("Database");
+            MongoDatabase = Environment.GetEnvironmentVariable("MONGO_STRING", EnvironmentVariableTarget.Machine);
             dbClient = new MongoClient(MongoDatabase);
             database = dbClient.GetDatabase("IMS");
             collection = database.GetCollection<Item>("items");
