@@ -1,24 +1,15 @@
 using API.Models;
 using MongoDB.Bson;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
 using Xunit.Abstractions;
 using System.Text;
-using System.Web.Helpers;
-using System.IdentityModel.Tokens.Jwt;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
-using API.xUnitTests.Attributes;
 using API.xUnitTests.Auth;
-using API.Classes.Utility;
-using MongoDB.Driver.GeoJsonObjectModel;
 
-namespace API.xUnitTests
+
+namespace API.xUnitTests.Tests.UserController
 {
-
-    [TestCaseOrderer("XUnit.Project.Orderers.PriorityOrderer", "XUnit.Project")]
-    public class UserController_Tests : IClassFixture<WebApplicationFactory<Program>>
+    public class UserController_Tests_Unordered : IClassFixture<WebApplicationFactory<Program>>
     {
         #region properties
         private readonly WebApplicationFactory<Program> _factory;
@@ -41,7 +32,7 @@ namespace API.xUnitTests
         #endregion Helper Classes
 
         #region Constructor
-        public UserController_Tests(WebApplicationFactory<Program> factory, ITestOutputHelper testOutputHelper)
+        public UserController_Tests_Unordered(WebApplicationFactory<Program> factory, ITestOutputHelper testOutputHelper)
         {
             _factory = factory;
             output = testOutputHelper;
@@ -60,8 +51,8 @@ namespace API.xUnitTests
         }
         #endregion Constructor
 
-        #region Tests
-        [Fact, TestPriority(-1)]
+        #region Unordered Tests
+        [Fact]
         public async void UserController_PostRequestToLoginEndpointAndCheckResponseSuccessStatusCode()
         {
             User user = new User();
@@ -85,6 +76,7 @@ namespace API.xUnitTests
             Assert.True(jsonToken != null);
 
             Assert.True(jsonToken.token.Length > 0 && jsonToken.token != null);
+            output.WriteLine("Successfully logged in using test account.");
         }
 
         [Fact]
@@ -103,7 +95,7 @@ namespace API.xUnitTests
             User[]? users = Newtonsoft.Json.JsonConvert.DeserializeObject<User[]>(responseValue);
             
             Assert.True(users != null && users.Length > 0);
-
+            output.WriteLine("Successfully retrieved all users.");
         }
 
         [Fact]
@@ -111,7 +103,7 @@ namespace API.xUnitTests
         {
             CheckAndSetToken();
 
-            var id = "63f6d683e53eb32d4e21c079";
+            var id = "63fa98e9f500820aae780272";
 
             var apiResponse = await client.GetAsync("users/" + id);
 
@@ -124,14 +116,14 @@ namespace API.xUnitTests
 
             Assert.True(user != null);
             Assert.True(user.username == "testUser");
+
+            output.WriteLine("Successfully retrieved user by id.");
             output.WriteLine("user.id = " + user.id);
             output.WriteLine("user.username = " + user.username);
             output.WriteLine("user.password = " + user.password);
             output.WriteLine("user.salt = " + user.salt);
         }
 
-
-        // TODO: Expand this test to include multiple usernames.
         [Fact]
         public async void UserController_PostRequestToUsersSearchEndpointAndCheckResponseSuccessStatus()
         {
@@ -158,9 +150,9 @@ namespace API.xUnitTests
             Assert.True(user.username != null);
             Assert.True(user.password != null);
             Assert.True(user.salt != null);
+            output.WriteLine("Successfully retrieved one or more users.");
         }
-
-        #endregion Tests
+        #endregion Unordered Tests
 
         #region Helper Functions
         private void CheckAndSetToken()

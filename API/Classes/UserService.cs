@@ -95,7 +95,7 @@ namespace API.Classes
         public User UpdateUser(string id, User user)
         {
             // reject the request if the body is missing the id, or if the id in the url and the id in the body do not match * this means the http request was tampered with *
-            if (user.id == null || user.id != id)
+            if (id == null || user.id != id)
                 return null;
 
             User OldUser = collection.Find(f => f.id == id).FirstOrDefault();
@@ -114,7 +114,10 @@ namespace API.Classes
                         {
                             HashPassword(user);
                         }
-                        updates.Add(UpdateBuilder.Set(UserProperties[i].Name, UserProperties[i].GetValue(user)));
+                        if (UserProperties[i].Name != "id")
+                        {
+                            updates.Add(UpdateBuilder.Set(UserProperties[i].Name, UserProperties[i].GetValue(user)));
+                        }
                     }
                 }
 

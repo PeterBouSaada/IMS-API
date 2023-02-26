@@ -31,7 +31,9 @@ namespace API.Controllers
             User foundUser = _cacheService.GetOrSet("user_" + id, 60 * 4, () => _userService.FindOneUser(id));
             return foundUser != null ? new ObjectResult(foundUser) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
-        ActionResult Search(User user)
+        
+        [HttpPost("search")]
+        public IActionResult Search(User user)
         {
             List<User> users = _userService.FindUser(user);
             return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();

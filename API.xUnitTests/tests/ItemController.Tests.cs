@@ -1,6 +1,6 @@
 ﻿using API.Models;
 
-namespace API.xUnitTests.tests
+namespace API.xUnitTests.Tests.ItemController
 {
     public class ItemController_Tests
     {
