@@ -21,17 +21,7 @@
 
 <br/>
 
-| Endpoint            | Request Method | Authorized | Return On Success | Return On Failure | Example Success Return                                                                                                          |
-| :------------------ | :------------: | :--------: | :---------------- | :---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| /users/Authenticate |      POST      |     NO     | 200 OK            | 401 Unauthorized  | JSON containing token: `{"token":"someToken"} `                                                                                 |
-| /users              |      GET       |    YES     | 200 OK            | 400 Bad Request   | JSON array containing users: `[{"id":"someId", . . . "salt":"someSalt"}, . . . {"id":"AnotherId", . . . "salt":"AnotherSalt"}]` |
-| /users/{id}         |      GET       |    YES     | 200 OK            | 400 Bad Request   | JSON Object containing user: `{"id":"someId", . . . "salt":"someSalt"}`                                                         |
-| /users/{id}         |     DELETE     |    YES     | 200 OK            | 400 Bad Request   | No return body                                                                                                                  |
-| /users/{id}         |      PUT       |    YES     | 200 OK            | 400 Bad Request   | JSON Object containing updated user: `{"id":"someId", . . . "salt":"someSalt"}`                                                 |
-| /users/add          |      POST      |    YES     | 201 Created       | 400 Bad Request   | JSON Object containing inserted user: `{"id":"someId", . . . "salt":"someSalt"}`                                                |
-| /users/search       |      POST      |    YES     | 200 OK            | 400 Bad Request   | JSON array containing users: `[{"id":"someId", . . . "salt":"someSalt"}, . . . {"id":"AnotherId", . . . "salt":"AnotherSalt"}]` |
-
-![User Endpoints](README Assets/UsersEndpoints.png)
+![Users Endpoints](https://github.com/PeterBouSaada/IMS-API/blob/master/README%20Assets/UsersEndpoints.png)
 
 <br/>
 
@@ -39,16 +29,7 @@
 
 <br/>
 
-| Endpoint      | Request Method | Authorized | Return On Success | Return On Failure | Example Success Return                                                                                                     |
-| :------------ | :------------: | :--------: | :---------------- | :---------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| /items        |      GET       |    YES     | 200 OK            | 400 Bad Request   | JSON array containing item: `[{"id":"someId", . . . "rpm":"someRPM"}, . . . {"id":"AnotherId", . . . "rpm":"AnotherRPM"}]` |
-| /items/{id}   |      GET       |    YES     | 200 OK            | 400 Bad Request   | JSON Object containing item: `{"id":"someId", . . . "rpm":"someRPM"}`                                                      |
-| /items/{id}   |     DELETE     |    YES     | 200 OK            | 400 Bad Request   | No return body                                                                                                             |
-| /items/{id}   |      PUT       |    YES     | 200 OK            | 400 Bad Request   | JSON Object containing updated item: `{"id":"someId", . . . "rpm":"someRPM"}`                                              |
-| /items/add    |      POST      |    YES     | 201 Created       | 400 Bad Request   | JSON Object containing inserted item: `{"id":"someId", . . . "rpm":"someRPM"}`                                             |
-| /items/search |      POST      |    YES     | 200 OK            | 400 Bad Request   | JSON array containing item: `[{"id":"someId", . . . "rpm":"someRPM"}, . . . {"id":"AnotherId", . . . "rpm":"AnotherRPM"}]` |
-
-![Items Endpoints](README Assets/ItemsEndpoints.png)
+![Items Endpoints](https://github.com/PeterBouSaada/IMS-API/blob/master/README%20Assets/ItemsEndpoints.png)
 
 <br/>
 
