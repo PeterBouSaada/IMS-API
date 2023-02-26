@@ -6,17 +6,6 @@
 
 <br/>
 
-### **Table Explanation:**
-
-**Endpoint:** the path of the request.<br/>
-**Request Method:** HTTP request method to use.<br/>
-**Authorized:** Requires an Authorization header with a Bearer Token.<br/>
-**Return On Success:** HTTP Response status code on success. <br/>
-**Return On Failure:** HTTP Response status code on failure. <br/>
-**Example Success Return:** JSON Response body on successful return. <br/>
-
-<br/>
-
 ### User Endpoints
 
 <br/>
