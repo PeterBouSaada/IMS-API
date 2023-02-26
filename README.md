@@ -4,8 +4,6 @@
 
 ### All the following endpoints are prefixed by the API url, in this case it is `http://localhost:5000` or `https://localhost:5001`
 
-<br/>
-
 ### User Endpoints
 
 <br/>
