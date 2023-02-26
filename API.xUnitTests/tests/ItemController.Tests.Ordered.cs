@@ -79,6 +79,8 @@ namespace API.xUnitTests.Tests.ItemController
             output.WriteLine("Successfully created item:");
             printItem(Item);
 
+            Assert.True(Item != null);
+
             Assert.True(Item.id != null);
             _fixture.newItemId = Item.id;
             Assert.True(_fixture.newItemId != null);
@@ -141,7 +143,7 @@ namespace API.xUnitTests.Tests.ItemController
 
         private void printItem(Item? Item)
         {
-
+            Assert.True(Item != null);
             Assert.True(Item.id != null);
             Assert.True(Item.partNumber != null);
 

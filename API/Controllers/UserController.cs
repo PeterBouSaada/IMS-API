@@ -25,18 +25,32 @@ namespace API.Controllers
             _cacheService = cache;
         }
 
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody] User user)
+        {
+            string token = _userService.AuthenticateUser(user);
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+            string json = JsonConvert.SerializeObject(new { token = token });
+            return Ok(json);
+        }
+
+
+        [HttpGet]
+        public IActionResult getAll()
+        {
+            List<User> users = _userService.getAllUsers();
+            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
             User foundUser = _cacheService.GetOrSet("user_" + id, 60 * 4, () => _userService.FindOneUser(id));
             return foundUser != null ? new ObjectResult(foundUser) { StatusCode = StatusCodes.Status200OK } : BadRequest();
-        }
-        
-        [HttpPost("search")]
-        public IActionResult Search(User user)
-        {
-            List<User> users = _userService.FindUser(user);
-            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPost("add")]
@@ -46,11 +60,11 @@ namespace API.Controllers
             return addedUser != null ? new ObjectResult(addedUser) { StatusCode = StatusCodes.Status201Created } : BadRequest();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        [HttpPost("search")]
+        public IActionResult Search(User user)
         {
-            User deletedUser = _userService.DeleteUser(id);
-            return deletedUser != null ? Ok() : BadRequest();
+            List<User> users = _userService.FindUser(user);
+            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPut("{id}")]
@@ -59,25 +73,12 @@ namespace API.Controllers
             User updatedUser = _userService.UpdateUser(id, user);
             return updatedUser != null ? new ObjectResult(updatedUser) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
-        
-        [HttpGet]
-        public IActionResult getAll()
-        {
-            List<User> users = _userService.getAllUsers();
-            return users != null ? new ObjectResult(users) { StatusCode = StatusCodes.Status200OK } : BadRequest();
-        }
 
-        [AllowAnonymous]
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User user)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
-            string token = _userService.AuthenticateUser(user);
-            if(token == null)
-            {
-                return Unauthorized();
-            }
-            string json = JsonConvert.SerializeObject(new { token = token });
-            return Ok(json);
+            User deletedUser = _userService.DeleteUser(id);
+            return deletedUser != null ? Ok() : BadRequest();
         }
 
     }

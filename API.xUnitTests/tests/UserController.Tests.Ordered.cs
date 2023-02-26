@@ -80,6 +80,8 @@ namespace API.xUnitTests.Tests.UserController
             output.WriteLine("Successfully created user:");
             printUser(user);
 
+            Assert.True(user != null);
+
             Assert.True(user.id != null);
             _fixture.newUserId = user.id;
             Assert.True(_fixture.newUserId != null);
@@ -138,7 +140,7 @@ namespace API.xUnitTests.Tests.UserController
 
         private void printUser(User? user)
         {
-
+            Assert.True(user != null);
             Assert.True(user.id != null);
             Assert.True(user.username != null);
             Assert.True(user.password != null);

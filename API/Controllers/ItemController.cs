@@ -23,19 +23,19 @@ namespace API.Controllers
             _cacheService = cache;
         }
 
+        [HttpGet]
+        public IActionResult getAll()
+        {
+            List<Item> items = _itemService.getAllItems();
+            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : BadRequest();
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
             
             Item foundItem = _cacheService.GetOrSet("item_" + id, 60 * 4, () => _itemService.FindOneItem(id)); ;
             return foundItem != null ? new ObjectResult(foundItem) { StatusCode = StatusCodes.Status200OK } : BadRequest();
-        }
-
-        [HttpPost("search")]
-        public IActionResult Search(Item item)
-        {
-            List<Item> items = _itemService.FindItem(item);
-            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPost("add")]
@@ -45,11 +45,11 @@ namespace API.Controllers
             return addedItem != null ? new ObjectResult(addedItem) { StatusCode = StatusCodes.Status201Created } : BadRequest();
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        [HttpPost("search")]
+        public IActionResult Search(Item item)
         {
-            Item deletedItem = _itemService.DeleteItem(id);
-            return deletedItem != null ? Ok() : BadRequest();
+            List<Item> items = _itemService.FindItem(item);
+            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
         [HttpPut("{id}")]
@@ -59,11 +59,12 @@ namespace API.Controllers
             return updatedItem != null ? new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 
-        [HttpGet]
-        public IActionResult getAll()
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
         {
-            List<Item> items = _itemService.getAllItems();
-            return items != null ? new ObjectResult(items) { StatusCode = StatusCodes.Status200OK } : BadRequest();
+            Item deletedItem = _itemService.DeleteItem(id);
+            return deletedItem != null ? Ok() : BadRequest();
         }
+
     }
 }
