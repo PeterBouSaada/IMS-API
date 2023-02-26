@@ -20,6 +20,8 @@
 
 <br/>
 
+To learn more about the Endpoints follow the Setup and Running the server below, then navigate to `http://localhost:5000/swagger`
+
 ## <u>Setup</u>
 
 <br/>
