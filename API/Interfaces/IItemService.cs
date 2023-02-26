@@ -9,7 +9,7 @@ namespace API.Interfaces
     public interface IItemService
     {
         Item AddItem(Item item);
-        Item UpdateItem(Item item);
+        Item UpdateItem(string id, Item item);
         Item DeleteItem(string id);
         List<Item> FindItem(Item item);
         Item FindOneItem(string id);

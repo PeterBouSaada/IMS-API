@@ -104,8 +104,13 @@ namespace API.Classes
             }
         }
 
-        public Item UpdateItem(Item item)
+        public Item UpdateItem(string id, Item item)
         {
+
+            // reject the request if the body is missing the id, or if the id in the url and the id in the body do not match * this means the http request was tampered with *
+            if (id == null || id != item.id)
+                return null;
+
             Item OldItem = collection.Find(f => f.id == item.id).FirstOrDefault();
             UpdateDefinitionBuilder<Item> UpdateBuilder = Builders<Item>.Update;
             PropertyInfo[] ItemProperties = item.GetType().GetProperties();

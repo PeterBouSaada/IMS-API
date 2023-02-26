@@ -52,10 +52,10 @@ namespace API.Controllers
             return deletedItem != null ? Ok() : BadRequest();
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] Item item)
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, [FromBody] Item item)
         {
-            Item updatedItem = _itemService.UpdateItem(item);
+            Item updatedItem = _itemService.UpdateItem(id, item);
             return updatedItem != null ? new ObjectResult(updatedItem) { StatusCode = StatusCodes.Status200OK } : BadRequest();
         }
 

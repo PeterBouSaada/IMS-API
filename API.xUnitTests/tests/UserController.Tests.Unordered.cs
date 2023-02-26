@@ -53,7 +53,7 @@ namespace API.xUnitTests.Tests.UserController
 
         #region Unordered Tests
         [Fact]
-        public async void UserController_PostRequestToLoginEndpointAndCheckResponseSuccessStatusCode()
+        public async Task UserController_PostRequestToLoginEndpointAndCheckResponseSuccessStatusCode()
         {
             User user = new User();
             user.username = "testUser";
@@ -80,7 +80,7 @@ namespace API.xUnitTests.Tests.UserController
         }
 
         [Fact]
-        public async void UserController_GetRequestToUsersGetAllEndpointAndCheckResponseSuccessStatus()
+        public async Task UserController_GetRequestToUsersGetAllEndpointAndCheckResponseSuccessStatus()
         {
             CheckAndSetToken();
 
@@ -99,7 +99,7 @@ namespace API.xUnitTests.Tests.UserController
         }
 
         [Fact]
-        public async void UserController_GetRequestToUsersGetByIdEndpointAndCheckResponseSuccessStatus()
+        public async Task UserController_GetRequestToUsersGetByIdEndpointAndCheckResponseSuccessStatus()
         {
             CheckAndSetToken();
 
@@ -125,7 +125,7 @@ namespace API.xUnitTests.Tests.UserController
         }
 
         [Fact]
-        public async void UserController_PostRequestToUsersSearchEndpointAndCheckResponseSuccessStatus()
+        public async Task UserController_PostRequestToUsersSearchEndpointAndCheckResponseSuccessStatus()
         {
             CheckAndSetToken();
 

@@ -55,7 +55,7 @@ namespace API.xUnitTests.Tests.UserController
 
         #region Ordered Tests
         [Fact, TestPriority(1)]
-        public async void UserController_Test1_PostRequestToUsersAddEndpointAndCheckResponseStatus()
+        public async Task UserController_Test1_PostRequestToUsersAddEndpointAndCheckResponseStatus()
         {
             CheckAndSetToken();
 
@@ -87,7 +87,7 @@ namespace API.xUnitTests.Tests.UserController
         }
 
         [Fact, TestPriority(2)]
-        public async void UserController_Test2_PutRequestToUsersUpdateEndpointAndCheckResponseStatus()
+        public async Task UserController_Test2_PutRequestToUsersUpdateEndpointAndCheckResponseStatus()
         {
 
             CheckAndSetToken();
@@ -113,7 +113,7 @@ namespace API.xUnitTests.Tests.UserController
         }
 
         [Fact, TestPriority(3)]
-        public async void UserController_Test3_DeleteRequestToUsersDeleteEndpointAndCheckResponseStatus()
+        public async Task UserController_Test3_DeleteRequestToUsersDeleteEndpointAndCheckResponseStatus()
         {
             CheckAndSetToken();
 
