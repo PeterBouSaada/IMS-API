@@ -14,7 +14,7 @@ namespace API.Classes
 {
     public class ItemService : IItemService
     {
-        private IConfiguration configuration;
+        private IConfiguration _configuration;
         private MongoClient dbClient;
         private IMongoDatabase database;
         private IMongoCollection<Item> collection;
@@ -23,8 +23,8 @@ namespace API.Classes
 
         public ItemService(IConfiguration config, ICache<Item> cache)
         {
-            this.configuration = config;
-            MongoDatabase = Environment.GetEnvironmentVariable("MONGO_STRING", EnvironmentVariableTarget.Machine);
+            this._configuration = config;
+            MongoDatabase = _configuration.GetSection("IMS").GetSection("DB").GetValue<string>("MONGO_STRING");
             dbClient = new MongoClient(MongoDatabase);
             database = dbClient.GetDatabase("IMS");
             collection = database.GetCollection<Item>("items");

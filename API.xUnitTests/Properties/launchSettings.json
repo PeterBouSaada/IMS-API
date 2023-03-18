@@ -3,10 +3,10 @@
     "API.xUnitTests": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "https://localhost:53488;http://localhost:53489",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "https://localhost:53488;http://localhost:53489"
+      }
     }
   }
 }

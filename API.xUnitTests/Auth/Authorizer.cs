@@ -32,9 +32,8 @@ namespace API.xUnitTests.Auth
         private Authorizer()
         {
             token = "";
-
-
-            AuthService = new JWTAuthenticationService();
+            IConfiguration config = new ConfigurationBuilder().AddEnvironmentVariables().Build();
+            AuthService = new JWTAuthenticationService(config);
         }
 
         public string? GetToken()

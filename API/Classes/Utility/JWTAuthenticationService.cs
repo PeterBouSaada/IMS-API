@@ -17,11 +17,13 @@ namespace API.Classes.Utility
         private string privateKey;
         private double expireTime;
         private JwtSecurityTokenHandler _handler;
+        private IConfiguration config;
 
-        public JWTAuthenticationService()
+        public JWTAuthenticationService(IConfiguration configuration)
         {
-            privateKey = Environment.GetEnvironmentVariable("JWT_PRIVATE_KEY", EnvironmentVariableTarget.Machine);
-            expireTime = Convert.ToDouble(Environment.GetEnvironmentVariable("JWT_EXPIRES_IN", EnvironmentVariableTarget.Machine));
+            config = configuration;
+            privateKey = config.GetSection("IMS").GetSection("JWT").GetValue<string>("PRIVATE_KEY");
+            expireTime = Convert.ToDouble(config.GetSection("IMS").GetSection("JWT").GetValue<string>("EXPIRES_IN"));
             _handler = new JwtSecurityTokenHandler();
         }
 

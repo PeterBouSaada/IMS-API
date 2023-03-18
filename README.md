@@ -33,28 +33,60 @@ To learn more about the Endpoints follow the Setup and Running the server below,
 
 | command                                                 | effect                                                                                                                                                              |
 | :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `setx MONGO_STRING "<YOUR-MONGO-CONNECTION-STRING>" /m` | Creates a machine wide environment variable called MONGO_STRING that contains the mongodb connection string that the API will use for storage.                      |
-| `setx JWT_PRIVATE_KEY "<YOUR-JWT-PRIVATE-KEY>" /m`      | Creates a machine wide environment variable called JWT_PRIVATE_KEY that contains the JSON Web Token private key used to manage and sign the keys created by the API |
-| `setx JWT_EXPIRES_IN "<JWT_EXPIRES_IN>" /m`             | Creates a machine wide environment variable called JWT_EXPIRES_IN that contains the amount in hours that a JWT Bearer token will be valid for.                      |
-
+| `setx IMS__DB__MONGO_STRING "<YOUR-MONGO-CONNECTION-STRING>" /m` | Creates a machine wide environment variable called IMS__DB__MONGO_STRING that contains the mongodb connection string that the API will use for storage.                      |
+| `setx IMS__JWT__PRIVATE_KEY "<YOUR-JWT-PRIVATE-KEY>" /m`      | Creates a machine wide environment variable called IMS__JWT__PRIVATE_KEY that contains the JSON Web Token private key used to manage and sign the keys created by the API |
+| `setx IMS__JWT__EXPIRES_IN "<JWT_EXPIRES_IN>" /m`             | Creates a machine wide environment variable called IMS__JWT__EXPIRES_IN that contains the amount in hours that a JWT Bearer token will be valid for.                      |
+<br/>
 <br/>
 
-### **Mac/Linux:**
+### **MacOS:**
 
 \- Open a terminal window.<br/>
-\- Navigate to ~ using the command `cd ~`<br/>
-\- Edit the `.profile` file using any editor, you can use vim using `vim .profile` from the terminal and add the following commands to the end (on seperate lines, and without any `"quotes"`):<br/>
+\- Navigate to `~/Library/LaunchAgents` using the command `cd ~/Library/LaunchAgents`<br/>
+\- Create or edit the file `environment.plist` using any editor, and add the following into the file:<br/>
 
-| command                                              | effect                                                                                                                                                              |
-| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `export MONGO_STRING=<YOUR-MONGO-CONNECTION-STRING>` | Creates a machine wide environment variable called MONGO_STRING that contains the mongodb connection string that the API will use for storage.                      |
-| `export JWT_PRIVATE_KEY=<YOUR-JWT-PRIVATE-KEY\>`     | Creates a machine wide environment variable called JWT_PRIVATE_KEY that contains the JSON Web Token private key used to manage and sign the keys created by the API |
-| `export JWT_EXPIRES_IN=<JWT_EXPIRES_IN>`             | Creates a machine wide environment variable called JWT_EXPIRES_IN that contains the amount in hours that a JWT Bearer token will be valid for.                      |
-
-\- Save the `.profile` file.
-
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>my.startup</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>sh</string>
+    <string>-c</string>
+    <string>
+    launchctl setenv IMS__DB__MONGO_STRING "[YOUR MONGO STRING HERE]"
+    launchctl setenv IMS__JWT__PRIVATE_KEY "[YOUR PRIVATE KEY HERE]"
+    launchctl setenv IMS__JWT__EXPIRES_IN "[YOUR EXPIRY TIME HERE]"
+    </string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+</dict>
+</plist>
+```
+\- Replace the bracketed text with your values, remove the brackets, keep the quotes
+\- Save the file and reboot, or run `launchctl load ~/Library/LaunchAgents/environment.plist`
 <br/>
 <br/>
+### **Linux:**
+
+\- Open a terminal window.<br/>
+\- Navigate to `/etc` using the command `cd /etc`<br/>
+\- Create or edit the file `environment` using any editor, and add the following into the file:<br/>
+
+```
+IMS__DB__MONGO_STRING="[YOUR MONGO STRING HERE]"
+IMS__JWT__PRIVATE_KEY="[YOUR PRIVATE KEY HERE]"
+IMS__JWT__EXPIRES_IN="[YOUR EXPIRY TIME HERE]"
+```
+\- Replace the bracketed text with your values, remove the brackets, keep the quotes
+\- Save the file and reboot
+<br/>
+<br/>
+
 
 ## <u>Running the xUnit tests</u>
 

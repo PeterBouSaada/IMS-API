@@ -35,7 +35,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            string key = Environment.GetEnvironmentVariable("JWT_PRIVATE_KEY", EnvironmentVariableTarget.Machine);
+            string key = Configuration.GetSection("IMS").GetSection("JWT").GetValue<string>("PRIVATE_KEY");
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddCors(
